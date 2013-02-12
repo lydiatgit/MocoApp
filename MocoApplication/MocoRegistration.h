@@ -123,10 +123,9 @@ protected:
 
 
 /**
- * MocoRegistration provides functionality for the Motion-Correction of 
- * 3D and 4D fMRI images. The interface works with image data encapsulated 
- * by EDDataElement or with 3D float itkImages . 
+ * MocoRegistration provides functionality for the Motion-Correction of 3D and 4D fMRI images. 
  *
+ * The interface works with image data encapsulated by EDDataElement or with 3D float itkImages .
  * Initialization sets default registration properties.
  *
  */
@@ -179,7 +178,7 @@ protected:
 /**
  * Set the image for the reference (stationary image) by given ITKImage.
  *
- * \param itkImage The referene image as EDDataElement.
+ * \param itkImage The referene image as ITKImage.
  *
  */
 -(void)setReferenceImageWithITKImage:(FixedImageType3D::Pointer)itkImage;
@@ -198,7 +197,7 @@ protected:
 
 
 /**
- * Align a EDDataElement to the reference image that was set for this registration.
+ * Align an EDDataElement to the reference image that was set for registration.
  * Be sure your registrationProperty and reference image are set before calling this function.
  * The returned transformation can be used to resample an EDDataelement using resampleMovingEDDataElement.
  *
@@ -213,14 +212,14 @@ protected:
 
 
 /**
- * Align an itk-image to the reference image that was set for this registration.
+ * Align an itk-image to the reference image that was set for registration.
  * Be sure your registrationProperty and reference image are set before calling this function.
  * The returned transformation can be used to resample an itk-image or an EDDataelement using resampleMovingEDDataElement.
  *
- * \param movingITKImage  EDDataElement that is registered to reference
+ * \param movingITKImage     ITKImage that is registered to reference
  *
  * \return                   A MocoTransformType describing the transformation of input
- *                           to reference image. transformation: [rotX rotY rotZ transX transY transZ]
+ *                           to reference image. Transformation: [rotX rotY rotZ transX transY transZ]
  *
  */
 -(MocoTransformType::Pointer)alignITKImageToReference:(MovingImageType3D::Pointer)movingITKImage;
@@ -244,8 +243,11 @@ protected:
 
 
 /**
- * Class method that retrieves a EDDataElement from a given image data file.
+ * Class method that retrieves an EDDataElement from a given image data file (file types supported depend on EDDataElement).
  *
+ * \param filePath  Complete path to an image file.
+ *
+ * \return          EDDataElement (4D) holding the image data
  */
 +(EDDataElement*)getEDDataElementFromFile:(NSString*)filePath;
 

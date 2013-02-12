@@ -12,9 +12,6 @@
 
 @implementation MocoRegistrationProperty
 
-@synthesize ParameterOutputFileOffset;//MHFIXME: not used
-@synthesize FinalMovementParameters;  //MHFIXME: not used
-
 @synthesize RegistrationParameters;
 @synthesize RegistrationInterpolationMode;
 @synthesize ResamplingInterpolationMode;
@@ -25,7 +22,6 @@
 @synthesize NumberOfThreads;
 @synthesize MaskImagesForRegistration;
 @synthesize UseBestFoundParameters;   
-@synthesize Threshold;                
 @synthesize LoggingLevel;
               
 
@@ -33,25 +29,21 @@
  
     if ( (self = [super init]) ) {
         RegistrationParameters  = (double *) malloc( 3 * sizeof(double) );
-        RegistrationParameters[0] = 1.0/50.0;
+        RegistrationParameters[0] = 1000;
         RegistrationParameters[1] = 0.019;
         RegistrationParameters[2] = 0.00001;
-        
-        
-        FinalMovementParameters = (double *) malloc( 6 * sizeof(double) );
-        
+                
         RegistrationInterpolationMode = LINEAR;
         ResamplingInterpolationMode   = BSPLINE4;
         NumberOfIterations            = 6;
         
         NumberOfThreads           = 1;
         Smoothing                 = YES;
-        SmoothingSigma            = 8; //== FWHM / 2.35482
-        SmoothingKernelWidth      = 64;
+        SmoothingSigma            = 5;
+        SmoothingKernelWidth      = 32;
         MaskImagesForRegistration = YES;
         
         UseBestFoundParameters  = NO;
-        Threshold               = 0;
         LoggingLevel            = 0;
     }
                                          
@@ -78,7 +70,6 @@
 - (void) dealloc {
     
     free(RegistrationParameters);
-    free(FinalMovementParameters);    
     
     [super dealloc];
 }

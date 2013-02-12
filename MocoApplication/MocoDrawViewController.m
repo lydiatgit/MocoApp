@@ -332,7 +332,6 @@
 	rotZPlot.dataSource = self;
 	[rotGraph addPlot:rotZPlot];
     
-    
     // Setup plot space    
 	CPTXYPlotSpace *rplotSpace = (id)rotGraph.defaultPlotSpace;
 	plotSpace.allowsUserInteraction = YES;
@@ -440,15 +439,14 @@
     [self.transGraph reloadData];
     [self.rotGraph reloadData];
     
-    
     //set new plot ranges if needed
     if(self.scanCounter >= self.plotSpaceXLength-(self.plotSpaceXLength*0.05))
     {
         
         self.plotSpaceXLength = self.plotSpaceXLength + 20;
         
-        CPTXYPlotSpace *plotSpace		  = (CPTXYPlotSpace *)transGraph.defaultPlotSpace;
-        CPTPlotRange *newRange		= [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(self.plotSpaceXLength*-0.06) length:CPTDecimalFromFloat(self.plotSpaceXLength)];	
+        CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)transGraph.defaultPlotSpace;
+        CPTPlotRange *newRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(self.plotSpaceXLength*-0.06) length:CPTDecimalFromFloat(self.plotSpaceXLength)];	
         plotSpace.xRange = newRange;
         
         
@@ -469,6 +467,8 @@
     self.rotArrayZ   = [NSMutableArray arrayWithCapacity:MOCO_MAX_NUMBER_SCANS];
 
     self.scanCounter = 0;
+    
+    //MH FIXME: also reset plot range in X ! 
     
     [self updateGraphs];
 
